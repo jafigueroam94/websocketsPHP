@@ -140,9 +140,12 @@ _webSocket.prototype._error = function(error){
 
 _webSocket.prototype._message = function(_e){
 	this._log._msg(_e.data, "RawData");
-	
+
+	//Expulsion de los datos
+	console.log(_e.data);
+
 	try{
-		var _package = JSON.parse(_e.data);
+		var _package = _e.data;
 	} catch (e){
 		this._log._msg("Data corrupted", "Error");
 		var msg = [this.DEFS.ERROR.ID, this.DEFS.ERROR.HANDLER.CONNECTION];	
@@ -292,7 +295,9 @@ _webSocket.prototype._message = function(_e){
 }
 
 _webSocket.prototype._sendAll = function(_msg){
-	var msg = [this.DEFS.MESSAGE.ID, this.DEFS.MESSAGE.HANDLER.TO_ALL, _msg];
+	let jsonOBJ = {nombre:_msg, conectado:true};
+	var msg = [this.DEFS.MESSAGE.ID, this.DEFS.MESSAGE.HANDLER.TO_ALL, JSON.stringify(Object.assign({}, jsonOBJ))];
+	// var msg = [this.DEFS.MESSAGE.ID, this.DEFS.MESSAGE.HANDLER.TO_ALL, _msg];
 	var a = {
 		"rawMsg" : JSON.stringify(msg),
 	}

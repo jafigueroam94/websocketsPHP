@@ -175,7 +175,8 @@
 								if($package[1] == $this->DEFS->MESSAGE->HANDLER->TO_ALL){
 									foreach ($this->users as $otherUser) {
 										if($otherUser->getId() != $user->getId()){
-											$otherUser->send('[2, 0, ["'.$user->getId().'", '.$package[2].']]');
+											$otherUser->send($package[2]);
+											// $otherUser->send('[2, 0, ["'.$user->getId().'", '.$package[2].']]');
 										}
 									}
 								} else if($package[1] == $this->DEFS->MESSAGE->HANDLER->TO_PLAYER){
